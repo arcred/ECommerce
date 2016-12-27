@@ -1,0 +1,145 @@
+body{
+    background-image: url("seigaiha.png");
+}
+
+#ul_top_hypers li {
+    float:right;
+    display: inline;
+    
+    padding-bottom: 8px;
+}
+
+.nav{
+    
+    height:60px;
+}
+
+#item{
+    padding:5px 5px 5px 5px;
+}
+
+.fa-male,.fa-female,.fa-plug,.fa-shopping-bag{
+   padding-right: 5px;
+}
+
+.fa-facebook-square{
+    color:#6140BD;
+    padding:0px 5px 0px 5px;
+}
+
+.fa-twitter-square{
+    color:#33C1FF;
+    padding:0px 5px 0px 5px;
+}
+
+.fa-google-plus-square{
+    color:#E2040A;
+    padding:0px 5px 0px 5px;
+}
+
+.fa-envelope-square{
+    color:#FDBF1A;
+    padding:0px 5px 0px 5px;
+}
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+#toprow{
+    
+     
+     width:fill;
+     
+     padding:0px 20px 0px 20px;
+}
+
+#topbar{
+    float:right;
+    background: rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+}
+
+#brandlogo{
+     padding:0px 0px 0px 20px;
+     
+}
+
+.box-category .box-heading
+        {
+            padding: 1px 3px 4px 7px;
+            font-size: 20px;
+            background: #19caaf;
+            
+        }
+        .menu 
+        {
+            padding: 5px 12px 12px 2px;
+            font-size: 15px;
+            background: lightblue;
+        }
+        .cat a
+        {
+            padding-left: 20px;
+        }
+       .container
+        {
+            padding-top: 75px;
+        }
+
+.add-on .input-group-btn > .btn {
+  border-left-width:0;left:-2px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+/* stop the glowing blue shadow */
+.add-on .form-control:focus {
+ box-shadow:none;
+ -webkit-box-shadow:none; 
+ border-color:#cccccc; 
+}
+
+.social:hover {
+     -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+     -o-transform: scale(1.1);
+ }
+
+ .social {
+     -webkit-transform: scale(0.8);
+     /* Browser Variations: */
+     
+     -moz-transform: scale(0.8);
+     -o-transform: scale(0.8);
+     -webkit-transition-duration: 0.5s;
+     -moz-transition-duration: 0.5s;
+     -o-transition-duration: 0.5s;
+ }
+
+/*
+    Multicoloured Hover Variations
+*/
+ 
+ #social-fb:hover {
+     color: #3B5998;
+ }
+ #social-tw:hover {
+     color: #4099FF;
+ }
+ #social-gp:hover {
+     color: #d34836;
+ }
+ #social-em:hover {
+     color: #f39c12;
+ }
