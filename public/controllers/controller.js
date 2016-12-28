@@ -1,67 +1,41 @@
-var myApp = angular.module('myApp',[]);
+var myApp=angular.module('myApp',[]);
 
-myApp.controller('appCtrl', function($scope,$http) {
-  console.log("Iam in Controller");
-  
-  		$http.get('/contactlist').then(function(response)
-		{
-		  	console.log("i got the data i requested");
-		  	console.log(response.data);
-		  	$scope.contactList = angular.fromJson(response).data;
-		});
-	  });	
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
- /*  refresh();
 
-  a.addContact = function(){
-  		console.log(a.contact);
-  		b.post('/contactlist',a.contact).then(function(response){
-  			console.log(response);
-  			refresh();
-  		});
-  };
+myApp.controller('AppCtrl',['$scope','$http',function(a,b){
+    console.log("Hello from controller");
+ 
 
-  a.remove = function(id){
-  		console.log(id);
-  		b.delete('/contactlist/' + id);
-  		refresh();
-  }
 
+a.view=function(prodname){
+    var productname=[];
+productname.push(prodname);
+    console.log(productname[0].name);
+    a.name=productname[0].name;
+    a.price=productname[0].price;
+    a.category=productname[0].category;
+    a.description=productname[0].description;
+};
+ 
+ a.searchItem=function(){
+     var responsedata=[];
+console.log(a.nameItem);
+ 
+ 
+b.post('/ecommerce',({'name':a.nameItem})).then(function(response){
+    
+console.log("Inside post from controller");
+console.log(response);
+console.log("AFter post in controller");
+ 
+responsedata.push(response.data);
+console.log(responsedata);
+
+a.seacrh=responsedata[0];
+
+});
+};
+    
+
+   
 }]);
- */
+    
