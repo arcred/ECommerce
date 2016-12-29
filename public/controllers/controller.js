@@ -3,7 +3,9 @@ var myApp=angular.module('myApp',[]);
 
 myApp.controller('AppCtrl',['$scope','$http',function(a,b){
     console.log("Hello from controller");
- 
+    
+    
+    
 
 
 a.view=function(prodname){
@@ -21,7 +23,7 @@ productname.push(prodname);
 console.log(a.nameItem);
  
  
-b.post('/ecommerce',({'name':a.nameItem})).then(function(response){
+b.post('/ecommerce',({'category':a.nameItem})).then(function(response){
     
 console.log("Inside post from controller");
 console.log(response);

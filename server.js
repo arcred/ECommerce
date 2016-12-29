@@ -9,11 +9,13 @@ app.use(bodyParser.json());
  
 
 
+
+
 app.post('/ecommerce',function(req,res){
  
 var collection=db.collection('ecommerce');
     
- console.log(req.body);
+console.log(req.body);
 collection.find(req.body,function(err,doc){
  
 if(err){
