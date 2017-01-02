@@ -2,6 +2,7 @@ var express=require('express');
 var app=express();
 var mongojs=require('mongojs');
 var db=mongojs('ecommerce',['ecommerce']);
+var featured=mongojs('featured',['featureProd']);
 var bodyParser=require('body-parser'); 
 
 app.use(express.static(__dirname + "/public"));
@@ -10,6 +11,22 @@ app.listen(3000);
 
 console.log("server running on port 3000");
  
+
+app.post('/featured',function(req,res){
+    console.log("iam in nginit server");
+    var collection = featured.collection('featureProd');
+    collection.find(function(err,doc)
+    {
+        if(err){
+            return;
+        }
+        else{
+            res.json(doc);
+            console.log("from init server");         
+        }
+    });
+
+});
 
 
 
