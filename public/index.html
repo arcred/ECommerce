@@ -57,40 +57,45 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-male"></i> Men <span class="fa fa-caret-down"></span>
+                                <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-male"></i> Men <span class="fa fa-caret-down"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
+                                    <li><a href="" ng-click="viewProducts('apparels','men')">apparels</a></li>
+                                    <li><a href="" ng-click="viewProducts('footwear','men')">footwear</a></li>
+                                    <li><a href="" ng-click="viewProducts('accessories','men')">accessories</a></li>
                                 </ul>
-                                </a>
+                                
                             </li>
                             <li class="dropdown">
-                                <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-female"></i> Women <span class="fa fa-caret-down"></span>
+                                <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-female"></i> Women <span class="fa fa-caret-down"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
+                                    <li><a href="" ng-click="viewProducts('apparels','women')">apparels</a></li>
+                                    <li><a href="" ng-click="viewProducts('footwear','women')">footwear</a></li>
+                                    <li><a href="" ng-click="viewProducts('accessories','women')">accessories</a></li>
                                 </ul>
-                                </a>
+                                
                             </li>
                             <li class="dropdown">
-                                <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plug"></i> Electronics <span class="fa fa-caret-down"></span>
+                                <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plug"></i> Electronics <span class="fa fa-caret-down"></span></a>
+                                
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
+                                    <li><a href="" ng-click="viewProducts('cameras','electronics')" >cameras</a></li>
+                                    <li><a href="" ng-click="viewProducts('laptop','electronics')">laptops</a></li>
+                                    <li><a href="" ng-click="viewProducts('mobile','electronics')">mobiles</a></li>
                                 </ul>
-                                </a>
+                                
+                                
                             </li>
                             <li class="dropdown">
-                                <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-bag"></i> Bags & Luggage <span class="fa fa-caret-down"></span>
+                                <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-bag"></i> Bags & Luggage <span class="fa fa-caret-down"></span></a>
+                                
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
+                                    <li><a href="" ng-click="viewProducts('trolley bags','bags&luggages')">trolley bags</a></li>
+                                    <li><a href="" ng-click="viewProducts('handbags','bags&luggages')">hand bags</a></li>
+                                    <li><a href="" ng-click="viewProducts('backpacks','bags&luggages')">backpacks</a></li>
                                 </ul>
-                                </a>
+                                
+                                
+                                
                             </li>
                             
                         </ul>
@@ -102,6 +107,9 @@
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
+            
+            
+            
             <div class="row">
                 <div class="col-xs-offset-2 col-xs-8 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
                     <div id="searchBox" class="form-group fadeInRight">
@@ -109,17 +117,50 @@
                             <div class="input-group-btn" >
                                 <div class="btn-group"> 
                                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                                        <span data-bind="label" id="searchLabel">All</span> <span class="caret"></span>
+                                        <span data-bind="label" id="searchLabel" ng-click="viewAll()">{{value}}</span> <span class="caret"></span>
                                     </button> 
                                     <ul class="dropdown-menu" role="menu" onchange="dropValue()">
-                                        <li><a href="#">Search by Department</a></li>
-                                        <li><a href="#">Search by Category</a></li>
+                                        
+                                        <li class="dropdown-submenu">
+                                            <a class="test" tabindex="-1" href="" ng-click="deptProducts('men')">Men<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a tabindex="-1" href="" ng-click="viewProducts('apparels','men')">Apparels</a></li>
+                                                <li><a tabindex="-1" href="" ng-click="viewProducts('footwear','men')">Footwear</a></li>
+                                                <li><a tabindex="-1" href="" ng-click="viewProducts('accessories','men')" >Accessories</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a class="test" tabindex="-1" href=""  ng-click="deptProducts('women')">Women<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a tabindex="-1" href="" ng-click="viewProducts('apparels','women')">Apparels</a></li>
+                                                <li><a tabindex="-1" href="" ng-click="viewProducts('footwear','women')">Footwear</a></li>
+                                                <li><a tabindex="-1" href="" ng-click="viewProducts('accessories','women')">Accessories</a></li>
+                                            </ul>
+                                        </li>
+                                        
+                                        <li class="dropdown-submenu">
+                                            <a class="test" tabindex="-1" href="" ng-click="deptProducts('electronics')">Electronics<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a tabindex="-1" href="" ng-click="viewProducts('cameras','electronics')">Cameras</a></li>
+                                                <li><a tabindex="-1" href="" ng-click="viewProducts('laptop','electronics')">Laptops</a></li>
+                                                <li><a tabindex="-1" href="" ng-click="viewProducts('mobile','electronics')">Mobiles</a></li>
+                                            </ul>
+                                        </li>
+               
+                                        <li class="dropdown-submenu">
+                                            <a class="test" tabindex="-1" href="" ng-click="deptProducts('bags&luggages')">Bags & Luggage<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a tabindex="-1" href="" ng-click="viewProducts('trolley bags','bags&luggages')">Trolley bags</a></li>
+                                                <li><a tabindex="-1" href="" ng-click="viewProducts('handbags','bags&luggages')">HandBags</a></li>
+                                                <li><a tabindex="-1" href="" ng-click="viewProducts('backpacks','bags&luggages')">BackPacks</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>  
                             <input type="search" name="searchBy" id="searchBy" class="form-control" placeholder="search in all categories" ng-model="nameItem"/>
                             <span class="input-group-btn">
-                                <button id="filter" class="btn btn-info btn-block" ng-click="searchItem()">
+                                <button id="filter" class="btn btn-info btn-block" ng-click="searchProduct()">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
                             </span>
@@ -165,7 +206,7 @@
             <div class="row">
                 <div class="col-xs-18 col-sm-6 col-md-3" ng-repeat="prod in search">
                     <div class="thumbnail">
-                        <img src="http://placehold.it/500x300" alt="">
+                        <a  href="" target="_blank"><img class="img-responsive" src={{prod.img}} alt="#" /></a>
                         <div class="caption" align=center>
                             
                             <h4>{{prod.name}}</h4>
@@ -216,7 +257,8 @@
 	                <a href="#"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
 	            </div>
 	        </nav>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+        <script src="js/angular.js"></script>
+        <script src="js/ngStorage.js"></script>
         <script src="controllers/controller.js"></script>
 	</body>	
 </html>

@@ -2,6 +2,21 @@ body{
     background-image: url("seigaiha.png");
 }
 
+.dropdown-submenu:hover .dropdown-menu {
+    display: block;
+}
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+.dropdown-menu{
+    display:none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,700,400italic);
 
