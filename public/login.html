@@ -1,0 +1,24 @@
+<div class="container"  ng-controller="loginController">
+<div style="background-color:rgba(255, 255, 255,0.5);" class="col-md-offset-4 col-md-6 col-lg-offset-4 col-lg-6 ">
+    <table align="center">
+        <tr align="center">
+            <td>E-mail: </td><td><input type="email" placeholder="Email:abc@abc.com" class="form-control" name="email" pattern="[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{2,3}$" ng-model="userMail"></td>                            
+        </tr>  
+        <tr align="center">
+            <td>Password</td><td><input type="password"  class="form-control" placeholder="Password" ng-model="userPassword" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" ng-model="userPassword"></td>
+        </tr>
+    </table>
+    <br>
+    <table align="center">
+        <tr> <td>  <button align="center" class="btn btn-success"  ng-click="userLogin()">SIGN IN</button></td></tr>
+        <p>{{user}}</p>
+        <p>{{password}}</p>
+        <p>{{userPassword}}</p>
+        <p>{{msg}}</p>
+        <p>{{id}}</p>
+
+        <tr> <td><p>New User<a href="#!/register"> SignUp</a></p></td></tr> 
+    </table> 
+    </div>
+</div>
+ 

@@ -1,42 +1,61 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
-	<head>
-		<meta charset="UTF-8">
-		<title>ECommerce</title>
-		
-		<link href="css/bootstrap.css" rel="stylesheet">
-		<link href="css/bootstrap-theme.css" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8">
+        <title>ECommerce</title>
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.css" rel="stylesheet">
         <link href="css/font-awesome.css" rel="stylesheet">
-		<link href="css/font-awesome.min.css" rel="stylesheet">
-		<link href="css/animate.css" rel="stylesheet">
-		<link href="css/appStyle.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/animate.css" rel="stylesheet">
+        <link href="css/appStyle.css" rel="stylesheet">
         <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
-		<script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script src="js/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="controllers/controller.js"></script>
         <style>
-           .carousel-inner > .item > img,
-           .carousel-inner > .item > a > img {
-               width: 100%;
-               margin: auto;
-               height: 250px;
-
+            .carousel-inner > .item > img,
+            .carousel-inner > .item > a > img {
+                width: 100%;
+                margin: auto;
+                height: 250px;
             }
             #searchBox {
-              -webkit-animation-duration: 1s;
-              -webkit-animation-delay: 0s;
-              /*-webkit-animation-iteration-count: infinite;*/
+                -webkit-animation-duration: 1s;
+                -webkit-animation-delay: 0s;
+                /*-webkit-animation-iteration-count: infinite;*/
             }
-            
+
             #navbar{
                 -webkit-animation-duration: 2s;
                 -webkit-animation-delay: 0s;
             }
+            #prodName
+            {
+                text-overflow: ellipsis;
+                white-space: nowrap; 
 
+            } 
+            
+            li.userDropdown{
+                
+                display: none;
+                
+            }
+            li.loginbtn{
+                
+                display: inline-block;
+            }
         </style>
-		
-	</head>
-	<body ng-controller="itemsController" ng-init="init()">
-        
+    </head>
+    <body ng-controller="itemsController" ng-init="init()" >
+
         <div class="container" >
+            
+            
             <nav id="navbar" class="fadeIn navbar navbar-default navbar-fixed-top">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -47,7 +66,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#" style="padding-right:40px;padding-left:30px">
+                        <a class="navbar-brand" href="#!/"  style="padding-right:40px;padding-left:30px">
                             <img alt="Brand" class="img-responsive" src="img/shopifylog.png">
                         </a>
                         <!--<input type="search" name="searchBy" id="searchBy" class="form-control" placeholder="search in all categories"/>-->    
@@ -56,209 +75,77 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-male"></i> Men <span class="fa fa-caret-down"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="" ng-click="viewProducts('apparels','men')">apparels</a></li>
-                                    <li><a href="" ng-click="viewProducts('footwear','men')">footwear</a></li>
-                                    <li><a href="" ng-click="viewProducts('accessories','men')">accessories</a></li>
+
+                            <li class="dropdown "><a href="" class="fa fa-male" id="Men" data-toggle="dropdown" class="dropdown-toggle" role="button" ng-click="showDrop('men')"> Men <b class="caret1"></b></a>
+                                <ul role="menu" class="dropdown-menu" aria-labelledby="drop1" >
+
+                                    <li role="presentation"><a href="" role="menuitem" ng-repeat="item in droplist  | unique:item " ng-click="viewProducts(item,'men')">{{item}}</a></li>
                                 </ul>
-                                
                             </li>
-                            <li class="dropdown">
-                                <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-female"></i> Women <span class="fa fa-caret-down"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="" ng-click="viewProducts('apparels','women')">apparels</a></li>
-                                    <li><a href="" ng-click="viewProducts('footwear','women')">footwear</a></li>
-                                    <li><a href="" ng-click="viewProducts('accessories','women')">accessories</a></li>
+
+
+                            <li class="dropdown "><a href="" class="fa fa-female"  aria-hidden="true" id="women" data-toggle="dropdown" class="dropdown-toggle" role="button" ng-click="showDrop('women')"> Women <b class="caret2"></b></a>
+                                <ul role="menu" class="dropdown-menu" aria-labelledby="drop2" >
+                                    <li role="presentation"><a href="" ole="menuitem" ng-repeat="item in droplist | unique:item" ng-click="viewProducts(item,'women')">{{item}}</a></li>
                                 </ul>
-                                
                             </li>
-                            <li class="dropdown">
-                                <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plug"></i> Electronics <span class="fa fa-caret-down"></span></a>
-                                
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="" ng-click="viewProducts('cameras','electronics')" >cameras</a></li>
-                                    <li><a href="" ng-click="viewProducts('laptop','electronics')">laptops</a></li>
-                                    <li><a href="" ng-click="viewProducts('mobile','electronics')">mobiles</a></li>
+
+                            <li class="dropdown "><a href=""  class="fa fa-plug"  aria-hidden="true"  id="Electronics" data-toggle="dropdown" class="dropdown-toggle" role="button" ng-click="showDrop('electronics')"> Electronics <b class="caret3"></b></a>
+                                <ul role="menu" class="dropdown-menu" aria-labelledby="drop3">
+                                    <li role="presentation"><a href=""  role="menuitem" ng-repeat="item in droplist | unique:item" ng-click="viewProducts(item,'electronics')">{{item}}</a></li>
                                 </ul>
-                                
-                                
                             </li>
-                            <li class="dropdown">
-                                <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-bag"></i> Bags & Luggage <span class="fa fa-caret-down"></span></a>
-                                
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="" ng-click="viewProducts('trolley bags','bags&luggages')">trolley bags</a></li>
-                                    <li><a href="" ng-click="viewProducts('handbags','bags&luggages')">hand bags</a></li>
-                                    <li><a href="" ng-click="viewProducts('backpacks','bags&luggages')">backpacks</a></li>
+
+                            <li class="dropdown "><a href="" class="fa fa-shopping-bag"  aria-hidden="true" id="bags&luggage" data-toggle="dropdown" class="dropdown-toggle" role="button" ng-click="showDrop('bags&luggages')"> Bags & Luggage <b class="caret4"></b></a>
+                                <ul role="menu" class="dropdown-menu" aria-labelledby="drop4" >
+                                    <li role="presentation"><a href="" role="menuitem" ng-repeat="item in droplist | unique:item" ng-click="viewProducts(item,'bags&luggages')">{{item}}</a></li>
                                 </ul>
-                                
-                                
-                                
+                            </li>
+
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#!/cart"><button class="btn btn-danger"><i id="shopping-cart" class="fa fa-shopping-cart"></i> Cart({{cartcount}})</button></a></li>
+                            <li class="loginbtn" id="logindd"><a href="#!/login"><button class="btn btn-danger"><i id="Login" class="fa fa-shopping-log-in"></i> Login </button></a></li>
+                            <li class="userDropdown" id="userdd">
+                            <div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">hi! user</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#">My Profile</a>
+    <a href="#">previous order</a>
+    <a href="" ng-click="logout()">Logout</a>
+  </div>
+</div>
+                            
+                            
                             </li>
                             
-                        </ul>
-
-                        <ul class="nav navbar-nav navbar-right">
-                        
-                            <li><a href="#"><button class="btn btn-danger"><i id="shopping-cart" class="fa fa-shopping-cart"></i> Cart</button></a></li>
+                            
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
+
+            <div ng-view>
             
-            
-            
-            <div class="row">
-                <div class="col-xs-offset-2 col-xs-8 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
-                    <div id="searchBox" class="form-group fadeInRight">
-                        <div class="input-group">
-                            <div class="input-group-btn" >
-                                <div class="btn-group"> 
-                                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                                        <span data-bind="label" id="searchLabel" ng-click="viewAll()">{{value}}</span> <span class="caret"></span>
-                                    </button> 
-                                    <ul class="dropdown-menu" role="menu" onchange="dropValue()">
-                                        
-                                        <li class="dropdown-submenu">
-                                            <a class="test" tabindex="-1" href="" ng-click="deptProducts('men')">Men<span class="caret"></span></a>
-                                            <ul class="dropdown-menu">
-                                                <li><a tabindex="-1" href="" ng-click="viewProducts('apparels','men')">Apparels</a></li>
-                                                <li><a tabindex="-1" href="" ng-click="viewProducts('footwear','men')">Footwear</a></li>
-                                                <li><a tabindex="-1" href="" ng-click="viewProducts('accessories','men')" >Accessories</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown-submenu">
-                                            <a class="test" tabindex="-1" href=""  ng-click="deptProducts('women')">Women<span class="caret"></span></a>
-                                            <ul class="dropdown-menu">
-                                                <li><a tabindex="-1" href="" ng-click="viewProducts('apparels','women')">Apparels</a></li>
-                                                <li><a tabindex="-1" href="" ng-click="viewProducts('footwear','women')">Footwear</a></li>
-                                                <li><a tabindex="-1" href="" ng-click="viewProducts('accessories','women')">Accessories</a></li>
-                                            </ul>
-                                        </li>
-                                        
-                                        <li class="dropdown-submenu">
-                                            <a class="test" tabindex="-1" href="" ng-click="deptProducts('electronics')">Electronics<span class="caret"></span></a>
-                                            <ul class="dropdown-menu">
-                                                <li><a tabindex="-1" href="" ng-click="viewProducts('cameras','electronics')">Cameras</a></li>
-                                                <li><a tabindex="-1" href="" ng-click="viewProducts('laptop','electronics')">Laptops</a></li>
-                                                <li><a tabindex="-1" href="" ng-click="viewProducts('mobile','electronics')">Mobiles</a></li>
-                                            </ul>
-                                        </li>
-               
-                                        <li class="dropdown-submenu">
-                                            <a class="test" tabindex="-1" href="" ng-click="deptProducts('bags&luggages')">Bags & Luggage<span class="caret"></span></a>
-                                            <ul class="dropdown-menu">
-                                                <li><a tabindex="-1" href="" ng-click="viewProducts('trolley bags','bags&luggages')">Trolley bags</a></li>
-                                                <li><a tabindex="-1" href="" ng-click="viewProducts('handbags','bags&luggages')">HandBags</a></li>
-                                                <li><a tabindex="-1" href="" ng-click="viewProducts('backpacks','bags&luggages')">BackPacks</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>  
-                            <input type="search" name="searchBy" id="searchBy" class="form-control" placeholder="search in all categories" ng-model="nameItem"/>
-                            <span class="input-group-btn">
-                                <button id="filter" class="btn btn-info btn-block" ng-click="searchProduct()">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </button>
-                            </span>
-                        </div>
-                     </div>
-                </div>
             </div>
-            <br>
-            <div id="myCarousel" class="carousel slide thumbnail" data-ride="carousel"> 
-            	<ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                    <li data-target="#myCarousel" data-slide-to="3"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="img\1.jpg" alt="Chania">
-                    </div>
-                    <div class="item">
-                        <img src="img\2.gif" alt="Chania">
-                    </div>
-                    <div class="item">
-                        <img src="img\3.jpg" alt="Flower">
-                    </div>
-                </div>
-                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-      		</div>           
-            <br>
-           
-            <ul class="breadcrumb" style="display:block">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Featured Products</a></li> 
-            </ul>
             
-            <div class="row">
-                <div class="col-xs-18 col-sm-6 col-md-3" ng-repeat="prod in search">
-                    <div class="thumbnail">
-                        <a  href="" target="_blank"><img class="img-responsive" src={{prod.img}} alt="#" /></a>
-                        <div class="caption" align=center>
-                            
-                            <h4>{{prod.name}}</h4>
-                            
-                            <Button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="view(prod)">view details</Button>
-                            <a class="btn btn-danger btn-sm"  ng-click="addItem(prod)" ><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-                                {{prod.count}}
-                            <a class="btn btn-danger btn-sm" ng-click="removeItem(prod)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-                            <p>
-                                <span class="pull-right">{{prod.price}}</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-              
             <div align=center>
                 <ul class="pagination pagination-lg">
                     <li ng-repeat="count in pages"><a href="" ng-click="">{{$index + 1}}</a></li>
-                    
+
                 </ul>
             </div>
-            <br>
-	        </div>
-	          
-	   
+            <br>    
+        </div>
+        <nav id="topbar" align=right>
+            <div id="toprow">
+                <a href="#"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+                <a href="#"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+                <a href="#"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
+                <a href="#"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+            </div>
+        </nav>
         
-        
-	    <div id="myModal" class="modal fade" role="dialog">
-	        <div class="modal-dialog modal-dialog-center">
-	            <div class="modal-content">
-	                <div class="modal-header">
-	                    <h3>{{name}}</h3>
-	               	</div>
-	                <div class="modal-body">
-	                    <p>{{category}}</p>
-	                    <p>{{price}}</p>
-	                    <p>{{description}}</p>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	    <nav id="topbar" align=right>
-	            <div id="toprow">
-	                <a href="#"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
-	                <a href="#"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
-	                <a href="#"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
-	                <a href="#"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
-	            </div>
-	        </nav>
-        <script src="js/angular.js"></script>
-        <script src="js/ngStorage.js"></script>
-        <script src="controllers/controller.js"></script>
-	</body>	
+    </body> 
 </html>
+

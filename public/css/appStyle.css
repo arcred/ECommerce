@@ -10,13 +10,32 @@ body{
     left: 100%;
     margin-top: -1px;
 }
-.dropdown-menu{
-    display:none;
+
+
+rating {
+    color: #a9a9a9;
+    margin: 1000;
+    padding: 1000;
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
+        ul.rating {
+            align-content  :center;
+            display: inline-block;
+        }
+
+        .rating li {
+            list-style-type: none;
+            display: inline-block;
+            padding: 1px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .rating .filled {
+            color: blue;
+        }
+
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,700,400italic);
 

@@ -1,0 +1,47 @@
+<html>
+	<head>
+
+
+	</head>
+	<body>
+
+		<div class="container"  ng-controller="registerController">
+            <div style="background-color:rgba(255, 255, 255,0.7);" class="col-md-offset-4 col-md-6 col-lg-offset-4 col-lg-6 ">
+			<h4 align="center">SignUp</h4>
+
+			<table align="center">
+				<tr align="center">
+					<td>First Name: </td><td><input type = "text" name = "first_name" pattern="[a-zA-Z]{3,15}" ng-model="first_Name" required> </td>                            
+				</tr>  
+				<tr align="center">
+					<td>Last Name: </td><td><input type = "text" name = "last_name" pattern="[a-zA-Z]{3,15}" ng-model="last_Name" required></td>  
+				</tr>
+
+				<tr align="center">
+					<td>Email: </td><td><input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{2,3}$" ng-model="email_Id" required></td>  
+				</tr>
+				<tr align="center">
+					<td>Password: </td><td><input type="password" id="ps1"name="pass" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" ng-model="pass_word"  required></td>  
+				</tr>
+
+				<tr align="center">
+					<td>Phone: </td><td><input type="text" name="phone" ng-model="contact" required></td>  
+				</tr>
+
+
+
+
+				<tr align="center"> <td><button type="submit" align="center" class="btn btn-info" id="submit" value="SignUp" ng-click="submit()">SignUp</button></td>  
+
+				</tr>
+
+			</table> 
+			
+			<p>{{status}}</p>
+
+
+		</div>
+        </div>
+
+	</body>
+</html>
