@@ -105,7 +105,7 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
 
     a.viewAll=function(){
 
-        var responseData=[];
+        var responseData=[];e.path('/');
         var allproducts=[];
 
         b.post('/ecommerce').then(function(response){
@@ -192,13 +192,13 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
     };
 
 
-
-
     f.init = function()
     {  
-
+        
         f.cartcount=c.count;
-
+        
+        console.log("inital featured elements");
+        console.log(f.search);
         console.log(localStorage.flag);
         if(localStorage.flag=="true"){
             console.log(localStorage.flag);
@@ -224,18 +224,21 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
             console.log("local storage is not initialized");
             c.addItems=[];
         }
-        b.post('/featureProd')
+        if(typeof(f.search)=='undefined'){
+            b.post('/featureProd')
             .then(function(response){
 
-            responseData.push(response.data);
-            responseData[0].forEach(function(dataCount) {
-                dataCount["count"] = 0;
-                responseDataWithCount.push(dataCount);
+                responseData.push(response.data);
+                responseData[0].forEach(function(dataCount) {
+                    dataCount["count"] = 0;
+                    responseDataWithCount.push(dataCount);
 
-            });
-            f.search=responseDataWithCount;     
+                });
+                f.search=responseDataWithCount;     
 
-        });
+            });    
+        }
+        
     };
 
     a.viewProducts=function(cat,dep)
@@ -244,6 +247,7 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
         var responseData=[]; var responseDataWithCount=[];
         var appareldata=[];
         a.value=cat;
+        e.path('/');
         b.post('/ecommerce',({'dept':dep})).then(function(response){
             responseData.push(response.data);
             for(var i=0;i<responseData[0].length;i++)
@@ -258,7 +262,7 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
             });
             f.search=appareldata;
         });
-        e.path('/');
+        
     };
 
 
