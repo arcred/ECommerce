@@ -1,0 +1,112 @@
+<div class="container" ng-controller="checkoutController" ng-init="init()">
+    <h5> In checkout Page</h5>
+    
+    <h2>{{val}}</h2>
+    
+    
+    <div class="panel-body" id="products_info">>
+            <table class="table">
+                <tr>
+                
+                    <th>Product Name</th>               
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    
+                </tr>
+                <tbody class="table-hover">
+                    <tr ng-repeat="prod in cartProducts">
+                        
+                        <td>{{prod.name}}</td>
+                        <td>{{prod.count}}</td>
+                        <td>{{prod.price}}</td>
+                    </tr>
+                    <tr><td></td><td></td><td></td><td align="right"><h3>Total Price :{{totalprice}}</h3></td></tr>
+                </tbody>
+            </table>
+        
+        </div>
+     <div class="container" id="place_orderbtn"><button align="center" class="btn btn-danger" href="" ng-click="orderConfirm()">Place Order</button></div> 
+   
+    
+    
+    
+    <div class="panel panel-info" id="order_info">
+    
+       
+    <table >
+        
+       <tr><td><h4>Your order has been placed successfully!</h4></td></tr>  
+        <tr><td>Transaction Id:#{{Txid}}</td></tr>
+        <tr><td>To Address:</td></tr>
+        <tr><td>{{toAddr}}</td></tr>
+        </table>
+    
+    <div class="container"><button align="center" class="btn btn-danger" href="" ng-click="continueShop()">continue Shopping</button></div>
+    
+    </div>
+    
+    
+   
+    
+     <div class="container" id="checkOut">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse1">Login</div>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <label for="email">Email-Id</label>
+                                <input type="email" id="email" name="email" ng-model="userMail">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="passowrd" ng-model="userPassword">
+                                <button class="btn btn-info" ng-click="loginCheckout()">Login</button>
+                                <p>{{msg}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <div data-toggle="collapse" data-parent="#accordion" href="#collapse2">Guest User</div>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name"  ng-model="guestName">
+                                <label for="email">Email-ID</label>
+                                <input type="email" id="email" name="email" ng-model="guestMail">
+                                <label for="address">Address</label>
+                                <input type="text" id="address" name="address" ng-model="guestAddress">
+                                <label for="phone">Phone</label>
+                                <input type="text" id="phone" name="phone" ng-model="guestPhone"> 
+                                <button class="btn btn-info" ng-click="orderConfirm()"> Order Confirm</button> 
+                                <p>{{msg}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </div>

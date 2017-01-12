@@ -1,24 +1,55 @@
-<div class="container"  ng-controller="loginController">
-<div style="background-color:rgba(255, 255, 255,0.5);" class="col-md-offset-4 col-md-6 col-lg-offset-4 col-lg-6 ">
-    <table align="center">
-        <tr align="center">
-            <td>E-mail: </td><td><input type="email" placeholder="Email:abc@abc.com" class="form-control" name="email" pattern="[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{2,3}$" ng-model="userMail"></td>                            
-        </tr>  
-        <tr align="center">
-            <td>Password</td><td><input type="password"  class="form-control" placeholder="Password" ng-model="userPassword" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" ng-model="userPassword"></td>
-        </tr>
-    </table>
-    <br>
-    <table align="center">
-        <tr> <td>  <button align="center" class="btn btn-success"  ng-click="userLogin()">SIGN IN</button></td></tr>
-        <p>{{user}}</p>
-        <p>{{password}}</p>
-        <p>{{userPassword}}</p>
-        <p>{{msg}}</p>
-        <p>{{id}}</p>
+<div class="container" ng-controller="loginController">    
+    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+        <div class="panel panel-info" >
+            <div class="panel-heading">
+                <div class="panel-title">Sign In</div>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px">
+                    <a href="">Forgot password?</a>
+                </div>
+            </div>     
 
-        <tr> <td><p>New User<a href="#!/register"> SignUp</a></p></td></tr> 
-    </table> 
-    </div>
+            <div style="padding-top:30px" class="panel-body" >
+                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>            
+                <form id="loginform" class="form-horizontal" role="form">
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="login-username" type="text" class="form-control"  pattern="[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{2,3}$" ng-model="userMail" placeholder="username or email">                                        
+                    </div>            
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input id="login-password" type="password" class="form-control"  placeholder="password" ng-model="userPassword" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$">
+                    </div>   
+                    <div class="input-group">
+                        <div class="checkbox">
+                            <label>
+                                <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+                            </label>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px" class="form-group">
+                        <div class="col-sm-12 controls">
+                            <a id="btn-login" href="" class="btn btn-success" ng-click="userLogin()">Login  </a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 control">
+                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                Don't have an account! 
+                                <a href="#!/register">
+                                Sign Up Here
+                                </a>
+                            </div>
+                        </div>
+                    </div>    
+                </form>     
+            </div>
+            <p>{{user}}</p>
+            <p>{{password}}</p>
+            <p>{{userPassword}}</p>
+            <p>{{msg}}</p>
+            <p>{{id}}</p>
+
+        </div>  
+    </div>         
 </div>
- 
+    

@@ -1,9 +1,9 @@
 var myApp=angular.module('myApp', ['ngStorage','ngRoute','angular.filter']);
 
 
-var loginStatus=false; var email="";
+var loginStatus="false"; var email="";
 localStorage.flag="false";
-var loginStatus=false;
+
 myApp.filter('offset', function() {
     
   return function(input,start) {
@@ -107,7 +107,7 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
 
         var responseData=[];e.path('/');
         var allproducts=[];
-
+        
         b.post('/ecommerce').then(function(response){
 
             responseData.push(response.data);
@@ -168,7 +168,7 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
 
                 if(f.cartItems[i]._id == product["_id"])
                 {
-                    product["count"]=product["count"]+1;
+                    
                     f.cartItems[i].count=f.cartItems[i].count+1;
                     console.log(f.cartItems[i].count);
 
@@ -192,7 +192,7 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
     };
 
 
-    f.init = function()
+    a.init = function()
     {  
         
         f.cartcount=c.count;
@@ -200,6 +200,7 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
         console.log("inital featured elements");
         console.log(f.search);
         console.log(localStorage.flag);
+        
         if(localStorage.flag=="true"){
             console.log(localStorage.flag);
             document.getElementById("logindd").style.display="none";
@@ -239,6 +240,7 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
             });    
         }
         
+        
     };
 
     a.viewProducts=function(cat,dep)
@@ -247,7 +249,8 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
         var responseData=[]; var responseDataWithCount=[];
         var appareldata=[];
         a.value=cat;
-        e.path('/');
+        var carousel = document.getElementById("carouselAction");
+        carousel.style.display = "none";
         b.post('/ecommerce',({'dept':dep})).then(function(response){
             responseData.push(response.data);
             for(var i=0;i<responseData[0].length;i++)
@@ -283,10 +286,12 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
         var temp=[];    
         var tempName=a.nameItem;
         temp=tempName.split(" ");
+        var carousel = document.getElementById("carouselAction");
+        carousel.style.display = "none";
         for(var i=0;i<temp.length;i++){
             nameProduct=temp[i];
             searchItem(nameProduct);
-        }   
+        }
     };   
     a.view=function(prodname){
         var productname=[];
@@ -297,6 +302,7 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
         a.category=productname[0].category;
         a.description=productname[0].description;
         a.img=productname[0].img;
+        
     };        
 
 
@@ -392,7 +398,8 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
             alert("No products found");
         }
         f.search=newArray;
-        refresh();
+        newArray=[];
+        refresh(); 
 
     };
 
@@ -419,8 +426,8 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
     a.logout=function(){
         localStorage.setItem("userDetails",null);
         console.log("logout");
-        localStorage.flag=false;
-        f.init();
+        localStorage.flag="false";
+        
         e.path('/');
     }
     
@@ -446,25 +453,31 @@ myApp.controller('itemsController',['$scope','$http', '$localStorage', '$session
 
 myApp.config(function($routeProvider) {
     $routeProvider
-        .when('/', {
+    .when('/', {
         templateUrl: 'homepage.html',
         controller: 'itemsController'
     })
-        .when('/cart', {
+    .when('/cart', {
         templateUrl: 'cart.html',
         controller: 'cartController'
     })
-        .when('/login', {
+    .when('/login', {
         templateUrl: 'login.html',
         controller: 'loginController'
     })
-        .when('/register', {
+    .when('/wishlist', {
+        templateUrl: 'wishlist.html',
+        controller: 'Controller'
+    })
+    .when('/register', {
         templateUrl: 'register.html',
         controller: 'registerController'
     })
-
-
-        .otherwise({
+    .when('/checkout', {
+        templateUrl: 'checkout.html',
+        controller: 'checkoutController'
+    })
+    .otherwise({
         redirectTo: '/'
     });
 });
@@ -480,40 +493,40 @@ myApp.controller('cartController',['$scope','$http', '$localStorage', '$sessionS
         sum+=f.cartItems[i].price*f.cartItems[i].count;
     }
     f.totalprice=sum;
+    a.changeCount=function(product){
+        console.log(a.cartProducts);
+        console.log(product);
+        console.log("before counter");
+        console.log(a.counter);
+        if(typeof(a.count)=='undefined'){
+            console.log("undefied if");
+            a.counter = 0;
+        }
+        console.log("after counter");
+        console.log(a.counter);
+        console.log("iam in ng-change");
+        for(var i=0;i<a.cartProducts.length;i++){
+            console.log("iam in for loop");
 
+            if(product._id==a.cartProducts[i]._id){
+                
+                a.cartProducts[i].count = a.counter;
+                console.log("iam in if statement");
+                product.count = a.counter;
+                break;
+            }
+           
+        }
+        console.log(product.count);
+        console.log(a.cartProducts);
+        f.cartItems = a.cartProducts;
+        console.log(f.cartItems);
+    }
     a.orderConfirm=function(){
-        if(localStorage.flag=="false")
-        {
-            a.confirmMsg="Please Login!"
-        }
-        else{
-
-            console.log("inside orderConfirm");
-            console.log(email);
-            console.log(f.cartItems);
-            userProducts.push(email);
-            userProducts.push(f.cartItems);
-            b.post('/userProducts',(userProducts)).then(function(response){
-				console.log(response);
-                if(response.data=="inserted"||response.data=="updated"){
-                c.addItems = [];
-                c.count =0;
-                f.cartItems=[];
-                a.cartProducts=f.cartItems;
-                a.totalprice=0;
-                f.cartcount=0;
-                c.count=0;        
-                a.confirmMsg="Thank you Your order has been placed!";
-                }
-            });
-
-        }
+        
     }
 
 }]);
-
-
-
 
 myApp.controller('loginController',['$scope','$http', '$localStorage', '$sessionStorage','$location','$rootScope',function(a,b,c,d,e,f){
     console.log("inside loginController");
@@ -557,9 +570,10 @@ myApp.controller('loginController',['$scope','$http', '$localStorage', '$session
                         console.log("redirect to dashboard");
                         console.log(localStorage.getItem("userDetails"));
                         console.log(localStorage.getItem("userDetails.emailid"));
-                        localStorage.flag=true;
+                        localStorage.flag="true";
                         console.log(localStorage.flag);
 
+                        loginStatus="true";
                         email=response.data[2][0].emailid;
                         e.path('/');
 
@@ -617,3 +631,263 @@ myApp.controller('registerController',['$scope','$http', '$localStorage', '$sess
 
 }]);
 
+
+myApp.controller('checkoutController',['$scope','$http', '$localStorage', '$sessionStorage','$location','$rootScope',function(a,b,c,d,e,f){
+    
+    
+    console.log("inside checkout controller");
+    
+    
+    f.init=function(){
+        
+        if(localStorage.flag=="true"){
+            
+            console.log(localStorage.flag+"ussr logged in already");
+            a.val="logged in";
+            
+            
+          document.getElementById("checkOut").style.display="none";
+           
+            
+        }
+        else{
+            
+           console.log(localStorage.flag+"user not logged in yet"); 
+            a.val="not loggged in" ;
+            
+           document.getElementById("checkOut").style.display="block";
+            
+        }
+        
+    }
+    
+    a.cartProducts = f.cartItems;
+    var sum=0;
+    for(var i=0;i<f.cartItems.length;i++)
+    {
+        sum+=f.cartItems[i].price*f.cartItems[i].count;
+    }
+    f.totalprice=sum;
+ 
+
+    var userProducts=[];
+     a.orderConfirm=function(){
+         
+         if(localStorage.flag=="true"){
+         
+         console.log("inside orderConfirm");
+            console.log(email);
+            console.log(f.cartItems);
+            userProducts.push(email);
+            userProducts.push(f.cartItems);
+            b.post('/userProducts',(userProducts)).then(function(response){
+                if(response.data=="inserted"||response.data=="updated"){
+                    c.addItems = [];
+                    c.count = 0;
+                    f.cartItems=[];
+                    a.cartProducts=f.cartItems;
+                    a.totalprice=0;
+                    f.cartcount=0;
+
+                    a.confirmMsg="Thank you Your order has been placed!";
+                }
+            });
+
+        document.getElementById("order_info").style.display="block";
+          document.getElementById("products_info").style.display="none";
+         
+         a.Txid= Math.floor((Math.random() * 10000000000) + 1) ;
+          //var responsedata=[];
+         b.post('/getAddress',({'emailid':userName})).then(function(response){
+             
+             console.log("after getng address from server");
+             console.log(response.data[0].address);
+            
+             //responsedata.push(response.data);
+            // console.log(responsedata);
+             a.toAddr=response.data[0].address;
+             
+         });
+         
+    } 
+          else{
+         
+         alert("please login/register to continue");
+     }
+     };
+    
+ 
+    a.loginCheckout=function(){
+        
+        var userName=a.userMail;
+        var userPassword=a.userPassword;
+        console.log("userName"+userName);
+        console.log("Password"+userPassword);
+
+        b.post('/userDetails',({'emailid':userName,'password':userPassword})).then(function(response){
+            console.log("inside post UserDetails");
+            console.log(response);
+
+            if(response.data==null)
+            {
+                a.msg="User Not Found Please SIGNUP";
+                console.log("navigate to login page page for registeration");
+            }
+            else
+            {
+                console.log(response);
+                var sessionId=response.data[0];
+
+                a.user=response.data[2][0].firstname;
+                a.password=response.data[2][0].password;
+                a.id=sessionId;
+                a.inputPassword=userPassword;
+                console.log(userPassword);
+                console.log(response.data[2][0].password);
+                if(userPassword==response.data[2][0].password)
+                {
+
+                    a.msg="Correct Password";
+                    localStorage.setItem("userDetails",JSON.stringify(response.data));
+                    console.log("redirect to dashboard");
+                    console.log(localStorage.getItem("userDetails"));
+                    console.log(localStorage.getItem("userDetails.emailid"));
+                    localStorage.flag=true;
+                    console.log(localStorage.flag);
+
+                    email=response.data[2][0].emailid;
+                    
+                    alert("logged in successfully");
+                    document.getElementById("checkOut").style.display="none";
+                    //e.path('/');
+
+
+                }
+                else{
+                    a.msg="Incorrect Password";
+                }    
+
+            }
+        });
+
+    } 
+
+    
+    
+    
+     a.continueShop=function(){
+         
+         e.path('/');
+     }
+    
+}]);
+
+
+
+myApp.controller('wishlistController',['$scope','$http', '$localStorage', '$sessionStorage','$location','$rootScope',function(a,b,c,d,e,f){
+    console.log("inside wishlistController");
+    if(localStorage.flag != "true"){
+        e.path('/login');
+    }
+    else{
+        
+
+    };
+    
+    var isNotPresent=function(id){
+
+        console.log(id);
+
+        for(var i = 0;i<f.cartItems.length;i++){
+
+            if(f.cartItems[i]._id == id){
+                console.log("product is present");
+                return false;
+            }
+        }
+        console.log("product is not present");
+        return true;
+    }
+    
+    var isNotPresentInWishList=function(id){
+
+        console.log(id);
+
+        for(var i = 0;i<f.wishListItems.length;i++){
+
+            if(f.wishListItems[i]._id == id){
+                console.log("product is present");
+                return false;
+            }
+        }
+        console.log("product is not present");
+        return true;
+    }
+
+
+    a.addItem = function(product){
+
+
+        if(typeof(c.count)!='undefined'){
+            c.count=c.count+1;
+
+        }
+        else{
+            c.count=0;
+            c.count=c.count+1;
+        }
+
+        f.cartcount=c.count;
+        if(isNotPresent(product["_id"]))
+        {
+
+            product["count"] = product["count"]+1;
+            console.log(product["count"]);
+
+            f.cartItems.push(product);
+
+        }
+        else 
+        {
+            console.log(product["count"]);
+            for(var i = 0;i<f.cartItems.length;i++){
+
+                if(f.cartItems[i]._id == product["_id"])
+                {
+                    
+                    f.cartItems[i].count=f.cartItems[i].count+1;
+                    console.log(f.cartItems[i].count);
+
+                    break;
+                }
+            }
+
+        } 
+
+
+        c.addItems = f.cartItems;
+        console.log(f.cartItems);
+    };
+
+    a.removeItem = function(product)
+    {
+        var index=c.addItems.indexOf(product);
+        f.cartItems.splice(index, 1);
+        c.addItems = f.cartItems;
+        console.log(f.cartItems);
+    };
+
+    
+    
+    
+    
+    
+    a.addToWishList = function(product){
+        
+    }
+    
+    a.removeFromWishList = function(product){
+        
+    }
+
+}]);

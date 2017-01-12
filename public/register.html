@@ -1,47 +1,99 @@
-<html>
-	<head>
+
+                <div ng-controller="registerController">
+			         <div class="panel panel-info">
+				        <div class="panel-heading">
+                            <div class="panel-title text-center" style="padding-bottom:'10px'">
+                                <h1 class="title">Register for ease of access</h1>
+                            </div>
+	                    </div> 
+                        <div class="panel panel-body">
+                        <div class="container">
+                            <div class="container">
+                                <form class="form-horizontal">
+
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-2 control-label">Firstname</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="name" id="name"  pattern="[a-zA-Z]{3,15}" ng-model="first_Name" placeholder="Enter your Name"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="cos-sm-2 control-label">Lastname</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="name" id="name"  pattern="[a-zA-Z]{3,15}" ng-model="last_Name" placeholder="Enter your Name"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-2 control-label">Your Email</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{2,3}$" ng-model="email_Id"  placeholder="Enter your Email"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="username" class="col-sm-2 control-label">Username</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="username" class="col-sm-2 control-label">Phonenumber</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+                                             <!--   <textarea type="text" name="phone" ng-model="contact" cols="25" rows="1" required></textarea>
+                                                --><input type="phone" class="form-control" name="phone" id="phone"  placeholder="Enter your Phone number"/>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
-	</head>
-	<body>
+                                    <div class="form-group">
+                                        <label for="password" class="col-sm-2 control-label">Password</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                                <input type="password" class="form-control" name="password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" ng-model="pass_word" placeholder="Enter your Password"/>
+                                            </div>
+                                        </div>
+                                    </div>
 
-		<div class="container"  ng-controller="registerController">
-            <div style="background-color:rgba(255, 255, 255,0.7);" class="col-md-offset-4 col-md-6 col-lg-offset-4 col-lg-6 ">
-			<h4 align="center">SignUp</h4>
+                                    <div class="form-group">
+                                        <label for="confirm" class="col-sm-2 control-label">Confirm Password</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                                <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+                                            </div>
+                                        </div>
+                                    </div>
 
-			<table align="center">
-				<tr align="center">
-					<td>First Name: </td><td><input type = "text" name = "first_name" pattern="[a-zA-Z]{3,15}" ng-model="first_Name" required> </td>                            
-				</tr>  
-				<tr align="center">
-					<td>Last Name: </td><td><input type = "text" name = "last_name" pattern="[a-zA-Z]{3,15}" ng-model="last_Name" required></td>  
-				</tr>
-
-				<tr align="center">
-					<td>Email: </td><td><input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{2,3}$" ng-model="email_Id" required></td>  
-				</tr>
-				<tr align="center">
-					<td>Password: </td><td><input type="password" id="ps1"name="pass" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" ng-model="pass_word"  required></td>  
-				</tr>
-
-				<tr align="center">
-					<td>Phone: </td><td><input type="text" name="phone" ng-model="contact" required></td>  
-				</tr>
-
-
-
-
-				<tr align="center"> <td><button type="submit" align="center" class="btn btn-info" id="submit" value="SignUp" ng-click="submit()">SignUp</button></td>  
-
-				</tr>
-
-			</table> 
+                                    <div class="form-group ">
+                                        <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="submit()">Register</button>
+                                    </div>
+                                    <div class="login-register"><label>Already a user?</label>
+                                        <a href="index.php">Login</a>
+                                     </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+			     </div>
+                 <p>{{status}}</p>		    
+            </div>
 			
-			<p>{{status}}</p>
-
-
-		</div>
-        </div>
-
-	</body>
-</html>
+			

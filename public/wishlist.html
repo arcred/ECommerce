@@ -1,7 +1,7 @@
-<div class="container" ng-controller="cartController">
+<div class="container" ng-controller="wishlistController">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 align="center">WISHLIST ITEMS</h3>
+            <h3 align="center">WishList Products</h3>
         </div>
         <div class="panel-body">
             <table class="table">
@@ -9,16 +9,16 @@
                     <th>item image</th>
                     <th>name</th>
                     <th>price/quantity</th>
-                    <th>quantity</th>
+                    <th>AddToWishList</th>
                     <th>Delete</th>
                 </tr>
                 <tbody class="table-hover">
-                    <tr ng-repeat="prod in cartProducts">
+                    <tr ng-repeat="prod in wishListProducts">
                         <td><img src={{prod.img}}  class="img-thumbnail img-responsive" style="height:100px"></td>
                         <td>{{prod.name}}</td>
                         <td>{{prod.price}}</td>
-                        <td><input class="form-control"  type="text" pattern="[1-9]{2}$" placeholder={{prod.count}} ng-model="counter" ng-change="changeCount(prod)" required>{{prod.count}}</td>
-                        <td><button class="btn btn-danger" ng-click="removeItem(prod)"><span class="fa fa-trash-o"></span>Remove</button></td>
+                        <td><button class="btn btn-danger" ng-click="addToWishList(prod)"><span class="fa fa-plus"></span> AddToCart</button></td>
+                        <td><button class="btn btn-danger" ng-click="removeFromWishList(prod)"><span class="fa fa-trash-o"></span>Remove</button></td>
                     </tr>
                 </tbody>
             </table>

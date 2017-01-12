@@ -39,6 +39,35 @@ app.post('/featureProd',function(req,res){
 
 });
 
+app.post('/getAddress',function(req,res){
+    
+    console.log(req.body);
+    
+    var collection=users.collection('userDetails');
+    
+    collection.find({'emailid':req.body.emailid},{'address':1},function(err,doc){
+        
+        
+        if(err)
+        {
+            return;
+        }
+        else
+        {
+            res.json(doc);
+            console.log("address sent"+doc);
+
+        }
+
+        
+        
+    });
+    
+    
+    
+});
+
+
 
 
 
